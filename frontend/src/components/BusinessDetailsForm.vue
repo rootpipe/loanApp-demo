@@ -10,7 +10,7 @@ const errorMessage = ref("");
 const preAssessment = ref(null);
 const currentYear = new Date().getFullYear();
 const minYear = 1900;
-const balanceSheet = ref([
+const balanceSheet = [
   {
     year: 2020,
     month: 12,
@@ -35,7 +35,7 @@ const balanceSheet = ref([
     profitOrLoss: -187000,
     assetsValue: 223452,
   },
-]);
+];
 const submitForm = async () => {
   isLoading.value = true;
   errorMessage.value = "";
@@ -44,7 +44,7 @@ const submitForm = async () => {
   const applicationData = {
     businessName: businessName.value,
     yearEstablished: yearEstablished.value,
-    balanceSheet: balanceSheet.value,
+    balanceSheet: balanceSheet,
   };
 
   try {
@@ -118,7 +118,7 @@ const submitForm = async () => {
           />
         </div>
         <AccountingSoftwareSelector />
-        <BalanceSheetDisplay />
+        <BalanceSheetDisplay :balanceSheet="balanceSheet" />
         <button
           type="submit"
           class="w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg"

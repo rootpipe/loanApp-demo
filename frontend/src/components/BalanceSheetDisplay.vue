@@ -1,3 +1,24 @@
+<script setup>
+import { defineProps } from "vue";
+
+const props = defineProps({
+  balanceSheet: {
+    type: Array,
+    required: true,
+  },
+});
+
+const formatCurrency = (value) => {
+  return "$" + value.toFixed(2);
+};
+const getClassForProfitOrLoss = (profitOrLoss) => {
+  return {
+    "px-2 inline-flex text-xs leading-5 font-semibold rounded-full": true,
+    "bg-green-100 text-green-800": profitOrLoss > 0,
+    "bg-red-100 text-red-800": profitOrLoss <= 0,
+  };
+};
+</script>
 <template>
   <div class="mt-6">
     <h3 class="text-lg leading-6 font-medium text-gray-900">Balance Sheet</h3>
@@ -5,7 +26,7 @@
       class="mt-2 max-w-xl bg-white rounded-md shadow overflow-hidden divide-y divide-gray-200"
     >
       <li
-        v-for="(item, index) in balanceSheet"
+        v-for="(item, index) in props.balanceSheet"
         :key="index"
         class="px-4 py-4 sm:px-6"
       >
@@ -14,9 +35,7 @@
             {{ item.month }}/{{ item.year }}
           </p>
           <div class="ml-2 flex-shrink-0 flex">
-            <p
-              class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800"
-            >
+            <p :class="getClassForProfitOrLoss(item.profitOrLoss)">
               {{ item.profitOrLoss > 0 ? "Profit" : "Loss" }}
             </p>
           </div>
@@ -37,15 +56,3 @@
     </ul>
   </div>
 </template>
-
-<script setup>
-import { ref } from "vue";
-
-const balanceSheet = ref([
-  { year: 2020, month: "Dec", profitOrLoss: 250000, assetsValue: 123400 },
-]);
-
-const formatCurrency = (value) => {
-  return "$" + value.toFixed(2);
-};
-</script>

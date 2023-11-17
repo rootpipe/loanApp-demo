@@ -1,3 +1,9 @@
+<script setup>
+import { ref } from "vue";
+
+const softwareOptions = ["Xero", "MYOB", "QuickBooks"];
+const selectedSoftware = ref("");
+</script>
 <template>
   <div class="mt-4">
     <label for="softwareSelect" class="block text-sm font-medium text-gray-700"
@@ -19,10 +25,3 @@
     </select>
   </div>
 </template>
-
-<script setup>
-import { ref } from "vue";
-
-const softwareOptions = ["Xero", "MYOB", "QuickBooks"];
-const selectedSoftware = ref("");
-</script>
