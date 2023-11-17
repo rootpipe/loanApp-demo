@@ -1,9 +1,11 @@
+from flask_cors import cross_origin
 from . import app
 from flask import request, jsonify
 from app.services import calculate_pre_assessment, summarize_balance_sheet
 
 
 @app.route("/submit-application", methods=["POST"])
+@cross_origin()
 def submit_application():
     try:
         data = request.json
