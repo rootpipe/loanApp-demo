@@ -5,3 +5,9 @@
 ```
 docker-compose up
 ```
+
+## visit
+
+```
+http://localhost/
+```
